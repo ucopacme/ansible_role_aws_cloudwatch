@@ -1,2 +1,17 @@
 ---
 # defaults file for ucopacme.aws_cloudwatch
+cloudwatch_dir: '/opt/src/AmazonCloudWatchAgent'
+cloudwatch_zip: '/opt/src/AmazonCloudWatchAgent.zip'
+cloudwatch_install: '/opt/src/AmazonCloudWatchAgent/install.sh'
+cloudwatch_src_url: 'https://s3.amazonaws.com/amazoncloudwatch-agent/linux/amd64/latest/AmazonCloudWatchAgent.zip'
+cloudwatch_conf_json: '/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json'
+cloudwatch_conf_toml: '/opt/aws/amazon-cloudwatch-agent/etc/common-config.toml'
+cloudwatch_user: 'ec2-user'
+cloudwatch_user_group: 'ec2-user'
+cloudwatch_user_comment: 'ec2 user'
+amazon_cloudwatch_agent_metrics_collection_interval: 60
+packages:
+  - unzip
+  - yum-utils
+  - which
+  - systemd
