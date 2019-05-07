@@ -1,0 +1,8 @@
+---
+# This playbook installs and configures aws ssm
+- name: "Install AWS cloudwatch agent"
+  become: true
+  gather_facts: true
+  hosts: all
+  roles:
+    - role: ucopacme.aws_cloudwatch
