@@ -1,3 +1,4 @@
 ---
 # tasks file for ucopacme.aws_cloudwatch
+- include: "cli_config.yml"
 - include: "{{ansible_os_family}}_install.yml"
