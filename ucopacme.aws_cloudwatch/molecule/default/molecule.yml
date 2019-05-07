@@ -6,12 +6,12 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: instance
+  - name: centos
     env:
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       AWS_SECURITY_TOKEN: ${AWS_SECURITY_TOKEN}
-    image: amazonlinux:2
+    image: centos/systemd
 provisioner:
   name: ansible
   lint:
