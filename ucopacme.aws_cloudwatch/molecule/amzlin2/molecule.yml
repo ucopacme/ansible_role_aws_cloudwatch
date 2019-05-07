@@ -1,0 +1,20 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  - name: amzlin2
+    image: amazonlinux
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+scenario:
+  name: amzlin2
+verifier:
+  name: testinfra
+  lint:
+    name: flake8
