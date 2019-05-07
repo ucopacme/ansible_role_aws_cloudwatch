@@ -1,0 +1,29 @@
+---
+# file: tasks/cli-config.yml
+#
+# aws cli configuration tasks.
+#
+
+- name: setup .aws directories
+  file:
+    group="{{ cli_user.group }}"
+    mode=0700
+    owner="{{ cli_user.owner }}"
+    path="{{ cli_user.home }}/.aws"
+    state=directory
+
+- name: aws cli config file
+  template:
+    dest="{{ cli_user.home }}/.aws/config"
+    group="{{ cli_user.group }}"
+    mode=0400
+    owner="{{ cli_user.owner }}"
+    src=root/.aws/config.j2
+
+- name: aws cli credentials file
+  template:
+    dest="{{ cli_user.home }}/.aws/credentials"
+    group="{{ cli_user.group }}"
+    mode=0400
+    owner="{{ cli_user.owner }}"
+    src=root/.aws/credentials.j2
