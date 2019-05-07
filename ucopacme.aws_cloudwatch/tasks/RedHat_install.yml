@@ -2,57 +2,7 @@
 
 - name: "install basic packages"
   action: >
-    {{ ansible_pkg_mgr }} name={{ packages }} state=latest update_cache=yes
-    # with_items: "{{ packages }}"
-
-- name: Ensure cloudwatch group  exists
-  group:
-    name: "{{ cloudwatch_user_group }}"
-    state: present
-
-- name: "install cloudwatch user"
-  user:
-    name: "{{ cloudwatch_user }}"
-    comment: "{{ cloudwatch_user_comment }}"
-    group: "{{ cloudwatch_user_group }}"
-
-- name: "dir to download CloudwatchAgent.zip"
-  file:
-    path: "{{ cloudwatch_dir }}"
-    state: directory
-    owner: root
-    group: root
-    mode: 0755
-    recurse: no
-
-- name: is amazon cloudwatch agent installed
-  yum:
-    list: "amazon-cloudwatch-agent"
-  register: yummy
-
-- name: debug yum list
-  debug:
-    var: yummy
-
-- name: "fetch AWS Cloudwatch agent archive if not already installed"
-  get_url:
-    url: "{{ cloudwatch_src_url }}"
-    dest: "{{ cloudwatch_zip }}"
-    mode: 550
-  when: yummy.results | selectattr("yumstate", "match", "installed") | list | length == 0
-
-- name: "Unzip cloudwatch agent archive"
-  unarchive:
-    dest: "{{ cloudwatch_dir }}"
-    remote_src: yes
-    src: "{{ cloudwatch_zip }}"
-  when: yummy.results | selectattr("yumstate", "match", "installed") | list | length == 0
-
-- name: "Install cloudwatch agent from archive"
-  command: "{{ cloudwatch_install }}"
-  args:
-    chdir: "{{ cloudwatch_dir }}"
-  when: yummy.results | selectattr("yumstate", "match", "installed") | list | length == 0
+    {{ ansible_pkg_mgr }} name={{ packages_rhel }} state=latest update_cache=yes
 
 - name: "amazon cloudwatch agent config from template"
   template:
@@ -71,7 +21,7 @@
     mode: 0755
 
 - name: restart amazon cloudwatch service
-  systemd:
-    enabled: yes
+  service:
+    enabled: true
     name: amazon-cloudwatch-agent
     state: "restarted"
