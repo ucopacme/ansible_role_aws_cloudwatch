@@ -1,0 +1,125 @@
+{
+  "metrics": {
+    "metrics_collected": {
+      "swap": {
+        "metrics_collection_interval": 60,
+        "measurement": [
+          "swap_used_percent"
+        ]
+      },
+      "cpu": {
+        "totalcpu": true,
+        "resources": [
+          "*"
+        ],
+        "metrics_collection_interval": 60,
+        "measurement": [
+          "cpu_usage_idle",
+          "cpu_usage_iowait",
+          "cpu_usage_steal",
+          "cpu_usage_guest",
+          "cpu_usage_user",
+          "cpu_usage_system"
+        ]
+      },
+      "disk": {
+        "resources": [
+          "*"
+        ],
+        "metrics_collection_interval": 60,
+        "measurement": [
+          "used_percent"
+        ]
+      },
+      "diskio": {
+        "resources": [
+          "*"
+        ],
+        "metrics_collection_interval": 60,
+        "measurement": [
+          "io_time",
+          "write_bytes",
+          "read_bytes",
+          "writes",
+          "reads"
+        ]
+      },
+      "mem": {
+        "metrics_collection_interval": 60,
+        "measurement": [
+          "mem_used_percent"
+        ]
+      },
+      "net": {
+        "resources": [
+          "*"
+        ],
+        "metrics_collection_interval": 60,
+        "measurement": [
+          "bytes_sent",
+          "bytes_recv",
+          "packets_sent",
+          "packets_recv"
+        ]
+      },
+      "netstat": {
+        "metrics_collection_interval": 60,
+        "measurement": [
+          "tcp_established",
+          "tcp_time_wait"
+        ]
+      },
+      "statsd": {
+        "service_address": ":8125",
+        "metrics_collection_interval": 10,
+        "metrics_aggregation_interval": 60
+      }
+    }
+  },
+  "logs": {
+    "logs_collected": {
+      "files": {
+        "collect_list": [
+          {
+            "file_path": "/home/eodell/logs/db2/*/db2diag.log",
+            "log_group_name": "db2",
+            "log_stream_name": "{hostname}",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%d-%H.%M.%S"
+          },
+          {
+            "timestamp_format": "%Y-%m-%d %H:%M:%S",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "log_stream_name": "hosts/{hostname}/ssm-agent",
+            "log_group_name": "OS",
+            "file_path": "/var/log/amazon/ssm/amazon-ssm-agent.log"
+          },
+          {
+            "timestamp_format": "%b %d %H:%M:%S",
+            "log_stream_name": "linux/{hostname}/cron",
+            "log_group_name": "OS",
+            "file_path": "/var/log/cron"
+          },
+          {
+            "timestamp_format": "%b %d %H:%M:%S",
+            "log_stream_name": "linux/{hostname}/messages",
+            "log_group_name": "OS",
+            "file_path": "/var/log/messages"
+          },
+          {
+            "timestamp_format": "%b %d %H:%M:%S",
+            "log_stream_name": "linux/{hostname}/secure",
+            "log_group_name": "OS",
+            "file_path": "/var/log/secure"
+          },
+          {
+            "timestamp_format": "%b %d %H:%M:%S",
+            "log_stream_name": "linux/{hostname}/maillog",
+            "log_group_name": "OS",
+            "file_path": "/var/log/maillog"
+          }
+        ]
+      }
+    }
+  }
+}
